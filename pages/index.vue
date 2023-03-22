@@ -1,61 +1,86 @@
 <template>
-  <header class="sticky top-0 bg-weather-primary shadow-lg">
-    <nav
-      class="container flex flex-col items-center gap-4 py-6 text-white sm:flex-row"
-    >
-      <NuxtLink to="/">
-        <div class="flex text-2xl">
-          <!-- Known hydration error, need to wrap in a span else enjoy double rendering-->
-          <span><font-awesome-icon :icon="['fas', 'sun']" /></span>
-          <p class="ml-4">The Local Weather</p>
-        </div>
-      </NuxtLink>
-      <div class="flex flex-1 justify-end gap-3">
-        <font-awesome-icon
-          class="cursor-pointer text-xl duration-150 hover:text-weather-secondary"
-          :icon="['fas', 'circle-info']"
-          @click="toggleModal"
-        />
-      </div>
-
-      <BaseModal :modal-active="modalActive" @close-modal="toggleModal">
-        <div class="text-black">
-          <h1 class="mb-1 text-2xl">About:</h1>
-          <p class="mb-4">
-            The Local Weather allows you to track the current and future weather
-            of cities of your choosing.
-          </p>
-          <h2 class="text-2xl">How it works:</h2>
-          <ol class="mb-4 list-inside list-decimal">
-            <li>
-              Search for your city by entering the name into the search bar.
-            </li>
-            <li>
-              Select a city within the results, this will take you to the
-              current weather for your selection.
-            </li>
-            <li>
-              Track the city by clicking on the "+" icon in the top right. This
-              will save the city to view at a later time on the home page.
-            </li>
-          </ol>
-
-          <h2 class="text-2xl">Removing a city</h2>
-          <p>
-            If you no longer wish to track a city, simply select the city within
-            the home page. At the bottom of the page, there will be am option to
-            delete the city.
-          </p>
-        </div></BaseModal
+  <main class="container text-white">
+    <div class="relative mb-8 pt-4">
+      <input
+        v-model="searchQuery"
+        @input="getSearchResults"
+        type="text"
+        placeholder="Search for a city or state"
+        class="w-full border-b bg-transparent py-2 px-1 focus:border-weather-primary focus:shadow-md focus:outline-none"
+      />
+      <ul
+        v-if="mapboxSearchResults"
+        class="absolute top-[66px] w-full bg-weather-secondary py-2 px-1 text-white shadow-md"
       >
-    </nav>
-  </header>
+        <p v-if="searchError">Sorry something went wrong, please try again.</p>
+        <p v-if="!searchError && mapboxSearchResults.length === 0">
+          No results match the given query, try a different place.
+        </p>
+        <template v-else>
+          <li
+            v-for="searchResult in mapboxSearchResults"
+            :key="searchResult.id"
+            class="cursor-pointer py-2"
+            @click="previewCity(searchResult)"
+          >
+            {{ searchResult.place_name }}
+          </li>
+        </template>
+      </ul>
+    </div>
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <CityCardSkeleton />
+        </template>
+      </Suspense>
+    </div>
+  </main>
 </template>
 
 <script setup>
-const modalActive = ref(null);
-const toggleModal = () => {
-  modalActive.value = !modalActive.value;
+import axios from "axios";
+
+const router = useRouter();
+const previewCity = (searchResult) => {
+  const [city, state] = searchResult.place_name.split(",");
+  router.push({
+    path: `/weather/${state.replaceAll(" ", "")}/${city}`,
+    query: {
+      lat: searchResult.geometry.coordinates[1],
+      lng: searchResult.geometry.coordinates[0],
+      preview: true,
+    },
+  });
+};
+const searchQuery = ref("");
+const queryTimeout = ref(null);
+const mapboxSearchResults = ref(null);
+const searchError = ref(null);
+
+//retrieve the runtime config
+const config = useRuntimeConfig();
+const mapboxApiKey = config.MAPBOX_API_KEY;
+
+const getSearchResults = () => {
+  clearTimeout(queryTimeout.value);
+  queryTimeout.value = setTimeout(async () => {
+    if (searchQuery.value !== "") {
+      try {
+        const result = await axios.get(
+          `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchQuery.value}.json?access_token=${mapboxApiKey}&types=place`
+        );
+        mapboxSearchResults.value = result.data.features;
+      } catch (error) {
+        console.error(error);
+        searchError.value = true;
+        mapboxSearchResults.value = null;
+      }
+    } else {
+      mapboxSearchResults.value = null;
+    }
+  }, 300);
 };
 </script>
 

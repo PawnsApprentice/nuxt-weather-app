@@ -3,12 +3,13 @@
     <Transition name="modal-outer">
       <div
         v-show="modalActive"
-        class="absolute top-0 left-0 h-screen w-full justify-center bg-black bg-opacity-30 px-8"
+        class="fixed top-0 left-0 flex h-screen w-full items-center justify-center bg-black bg-opacity-30 px-8"
+        style="z-index: 9999"
       >
         <Transition name="modal-inner">
           <div
             v-if="modalActive"
-            class="mt-32 max-w-screen-md self-start bg-white p-4"
+            class="mx-auto mt-32 max-w-screen-md self-start bg-white p-4"
           >
             <slot />
             <button
