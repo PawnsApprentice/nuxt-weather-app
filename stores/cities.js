@@ -6,6 +6,7 @@ export const useCitiesStore = defineStore("city-store", {
       cityId: "",
       cityName: "",
       cityState: "",
+      cityImage: "",
       cities: useCookie("savedCities").value || [],
     };
   },
@@ -24,6 +25,10 @@ export const useCitiesStore = defineStore("city-store", {
       this.cityId = "";
       this.cityName = "";
       this.cityState = "";
+      this.cityImage = "";
+    },
+    setImage(url) {
+      this.cityImage = url;
     },
   },
 });

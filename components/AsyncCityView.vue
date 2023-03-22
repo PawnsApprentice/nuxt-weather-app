@@ -36,6 +36,8 @@
         :src="`https://openweathermap.org/img/wn/${weatherData.current.weather[0].icon}@2x.png`"
         alt="Weather Picture"
       />
+      <p class="mb-1 capitalize">Wind&deg {{ weatherData.current.wind_deg }}</p>
+      <p>Wind Speed: {{ weatherData.current.wind_speed }} m/s</p>
     </div>
     <hr class="w-full border border-white border-opacity-10" />
     <!-- Weather Overview -->
@@ -118,6 +120,8 @@ const cityStore = useCitiesStore();
 const route = useRoute();
 const router = useRouter();
 
+const icon = ref("");
+
 //retrieve the runtime config
 const config = useRuntimeConfig();
 const openweatherApiKey = config.OPENWEATHER_API_KEY;
@@ -146,10 +150,15 @@ const { data: weatherData, error } = await useFetch(
     transform: (data) => {
       // transform the data here
       const transformedData = modifyData(data);
+      icon.value = transformedData.current.weather[0].icon;
       return transformedData;
     },
   }
 );
+
+onMounted(() => {
+  cityStore.setImage(`https://openweathermap.org/img/wn/${icon.value}@2x.png`);
+});
 
 const removeCity = () => {
   const cities = useCookie("savedCities");

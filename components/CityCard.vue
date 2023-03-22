@@ -1,13 +1,19 @@
 <template>
   <div
-    class="flex cursor-pointer rounded-full py-6 px-3 shadow-md backdrop-blur-xl backdrop-opacity-70 backdrop-filter hover:shadow-lg"
+    class="flex cursor-pointer justify-between rounded-full py-6 px-3 shadow-md backdrop-blur-xl backdrop-opacity-70 backdrop-filter hover:shadow-lg"
     @click="goToCityView(city)"
   >
-    <div class="ml-10 flex flex-1 flex-col">
+    <div class="ml-10 flex flex-col">
       <h2 class="text-3xl">{{ city.city }}</h2>
       <h3>{{ city.state }}</h3>
     </div>
-
+    <div>
+      <img
+        class="h-20 rounded-lg object-contain brightness-125 contrast-125 filter"
+        :src="city.image"
+        alt="Weather Picture"
+      />
+    </div>
     <div class="flex flex-col gap-2">
       <p class="self-end text-3xl">
         {{ fToCelcius(city.weather.main.temp) }}&deg;
@@ -23,9 +29,9 @@
         </span>
       </div>
     </div>
-    <div class="ml-10 flex items-center justify-center">
+    <div class="mr-10 flex items-center justify-center">
       <font-awesome-icon
-        class="cursor-pointer text-2xl duration-150 hover:text-red-500"
+        class="cursor-pointer text-3xl duration-150 hover:text-red-500"
         :icon="['fas', 'trash']"
         @click="deleteCity($event, city)"
       />
@@ -49,6 +55,7 @@ defineProps({
 const router = useRouter();
 
 const goToCityView = (city) => {
+  console.log(city);
   cityStore.setCityDetails(city.id, city.state, city.city);
   router.push({
     path: `/weather/${city.state}/${city.city}`,

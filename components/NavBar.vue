@@ -65,6 +65,7 @@ import { storeToRefs } from "pinia";
 
 const cityStore = useCitiesStore();
 
+const { cityImage } = storeToRefs(cityStore);
 const route = useRoute();
 const router = useRouter();
 const modalActive = ref(null);
@@ -87,6 +88,7 @@ const addCity = () => {
       lat: route.query.lat,
       lng: route.query.lng,
     },
+    image: cityImage.value,
   };
 
   savedCities.value.push(locationObj);
