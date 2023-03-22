@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex cursor-pointer rounded-md bg-weather-secondary py-6 px-3 shadow-md"
+    class="flex cursor-pointer rounded-full py-6 px-3 shadow-md backdrop-blur-xl backdrop-opacity-70 backdrop-filter hover:shadow-lg"
     @click="goToCityView(city)"
   >
-    <div class="flex flex-1 flex-col">
+    <div class="ml-10 flex flex-1 flex-col">
       <h2 class="text-3xl">{{ city.city }}</h2>
       <h3>{{ city.state }}</h3>
     </div>
@@ -68,3 +68,4 @@ const deleteCity = (event, citySelected) => {
   cityStore.setCities(cities.value);
 };
 </script>
+<style scoped></style>

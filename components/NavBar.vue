@@ -1,7 +1,7 @@
 <template>
-  <header class="sticky top-0 bg-weather-primary shadow-lg">
+  <header class="sticky top-0">
     <nav
-      class="container flex flex-col items-center gap-4 py-6 text-white sm:flex-row"
+      class="container flex flex-col items-center gap-4 bg-transparent py-6 text-white sm:flex-row"
     >
       <NuxtLink to="/">
         <div class="flex text-2xl">
@@ -100,4 +100,21 @@ const addCity = () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+nav {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+nav a {
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #ccc;
+}
+</style>

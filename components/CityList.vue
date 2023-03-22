@@ -1,4 +1,5 @@
 <template>
+  <div v-if="cities.length === 0"><CityCardSkeleton /></div>
   <div v-for="city in cities" :key="city.id">
     <CityCard :city="city" />
   </div>

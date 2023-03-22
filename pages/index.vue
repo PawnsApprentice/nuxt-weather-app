@@ -6,11 +6,11 @@
         @input="getSearchResults"
         type="text"
         placeholder="Search for a city or state"
-        class="w-full border-b bg-transparent py-2 px-1 focus:border-weather-primary focus:shadow-md focus:outline-none"
+        class="focus:shadow-outline-blue w-full appearance-none rounded-lg border bg-gray-100 bg-opacity-50 px-3 py-2 placeholder-gray-400 shadow-sm transition-all duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
       />
       <ul
         v-if="mapboxSearchResults"
-        class="absolute top-[66px] w-full bg-weather-secondary py-2 px-1 text-white shadow-md"
+        class="absolute top-[66px] z-10 w-full bg-weather-secondary py-2 px-1 text-white shadow-md"
       >
         <p v-if="searchError">Sorry something went wrong, please try again.</p>
         <p v-if="!searchError && mapboxSearchResults.length === 0">

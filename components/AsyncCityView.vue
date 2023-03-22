@@ -1,10 +1,7 @@
 <template>
   <div class="fkex-1 flex flex-col items-center">
     <!-- Banner -->
-    <div
-      v-if="route.query.preview"
-      class="w-full bg-weather-secondary p-4 text-center text-white"
-    >
+    <div v-if="route.query.preview" class="w-full p-4 text-center text-white">
       <p>
         You are currently previewing this city, click the "+" icon to start
         tracking this city.
