@@ -12,8 +12,8 @@ export default defineNuxtConfig({
   css: ["@fortawesome/fontawesome-svg-core/styles.css"],
   runtimeConfig: {
     public: {
-      MAPBOX_API_KEY: process.env.MAPBOX_API_KEY,
-      OPENWEATHER_API_KEY: process.env.OPENWEATHER_API_KEY,
+      MAPBOX_API_KEY: process.env.NUXT_ENV_MAPBOX_API_KEY,
+      OPENWEATHER_API_KEY: process.env.NUXT_ENV_OPENWEATHER_API_KEY,
     },
   },
   app: {
