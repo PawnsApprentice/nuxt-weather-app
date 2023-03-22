@@ -10,7 +10,6 @@ export default defineNuxtConfig({
     ],
   ],
   css: ["@fortawesome/fontawesome-svg-core/styles.css"],
-  ssr: false,
   runtimeConfig: {
     public: {
       MAPBOX_API_KEY: process.env.NUXT_ENV_MAPBOX_API_KEY,
