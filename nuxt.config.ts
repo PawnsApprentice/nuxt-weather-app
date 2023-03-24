@@ -9,7 +9,15 @@ export default defineNuxtConfig({
       },
     ],
   ],
-  css: ["@fortawesome/fontawesome-svg-core/styles.css"],
+  //known issue on github
+  build: {
+    transpile: ["@fortawesome/vue-fontawesome"],
+  },
+  css: [
+    "@fortawesome/fontawesome-svg-core/styles.css",
+    "@/assets/preloading.css",
+  ],
+
   runtimeConfig: {
     public: {
       MAPBOX_API_KEY: process.env.NUXT_ENV_MAPBOX_API_KEY,

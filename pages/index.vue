@@ -6,7 +6,7 @@
         @input="getSearchResults"
         type="text"
         placeholder="Search for a city or state"
-        class="focus:shadow-outline-blue w-full appearance-none rounded-lg border bg-gray-100 bg-opacity-50 px-3 py-2 placeholder-gray-400 shadow-sm transition-all duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
+        class="focus:shadow-outline-blue w-full appearance-none rounded-lg border bg-gray-100 bg-opacity-50 px-3 py-2 placeholder-white shadow-sm transition-all duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
       />
       <ul
         v-if="mapboxSearchResults"
