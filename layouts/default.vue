@@ -1,20 +1,25 @@
 <template>
-  <div
-    class="flex min-h-screen flex-col font-Roboto"
-    :style="{
-      backgroundImage: `url(${backImage})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center',
-    }"
-  >
+  <div class="font-rubik bg-img flex min-h-screen flex-col">
     <NavBar />
     <slot />
   </div>
 </template>
 
-<script setup>
-import backImage from "@/assets/wallpaper.jpg";
-</script>
+<script setup></script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.bg-img {
+  background-image: url(@/assets/night/rain.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: grey;
+  transition: 500ms;
+  opacity: 1;
+}
+
+.font-rubik {
+  font-family: "Rubik", sans-serif;
+}
+</style>

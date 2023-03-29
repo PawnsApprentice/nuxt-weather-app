@@ -1,5 +1,5 @@
 <template>
-  <div class="fkex-1 flex flex-col items-center">
+  <div class="flex flex-1 flex-col items-center">
     <!-- Banner -->
     <div v-if="route.query.preview" class="w-full p-4 text-center text-white">
       <p>
@@ -8,7 +8,7 @@
       </p>
     </div>
     <!-- Weather Overview -->
-    <div class="flex flex-col items-center py-12 text-white">
+    <div class="windowpane mb-10 flex flex-col items-center text-white">
       <h1 class="mb-2 text-4xl">{{ route.params.city }}</h1>
       <p class="mb-12 text-sm">
         {{
@@ -39,10 +39,10 @@
       <p class="mb-1 capitalize">Wind&deg {{ weatherData.current.wind_deg }}</p>
       <p>Wind Speed: {{ weatherData.current.wind_speed }} m/s</p>
     </div>
-    <hr class="w-full border border-white border-opacity-10" />
-    <!-- Weather Overview -->
-    <div class="w-full max-w-screen-md py-12">
-      <div class="mx-8 text-white">
+    <hr class="mb-5 w-full border border-white border-opacity-10" />
+    <!-- Hourly Overview -->
+    <div class="w-full max-w-screen-md py-2">
+      <div class="windowpane mx-8 mb-5 text-white">
         <h2 class="mb-4">Hourly Weather</h2>
         <div class="flex gap-10 overflow-x-scroll">
           <div
@@ -67,9 +67,9 @@
         </div>
       </div>
     </div>
-    <hr class="w-full border border-white border-opacity-10" />
+    <hr class="mb-5 w-full border border-white border-opacity-10" />
     <!-- Weekly Forecast -->
-    <div class="w-full max-w-screen-md py-12">
+    <div class="windowpane mb-5 w-full max-w-screen-md">
       <div class="mx-8 text-white">
         <h2 class="mb-4">7 Day Forecast</h2>
         <div
@@ -142,7 +142,7 @@ const modifyData = (data) => {
 };
 
 //Flicker Delay
-await new Promise((res) => setTimeout(res, 700));
+await new Promise((res) => setTimeout(res, 1500));
 
 const { data: weatherData, error } = await useFetch(
   `https://api.openweathermap.org/data/3.0/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=${openweatherApiKey}&units=imperial`,
@@ -172,3 +172,16 @@ const removeCity = () => {
   });
 };
 </script>
+
+<style scoped>
+.windowpane {
+  padding: 30px 40px;
+  border-radius: 10px;
+  margin-top: 10px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: rgba(110, 110, 110, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+</style>

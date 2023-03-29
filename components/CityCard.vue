@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex cursor-pointer justify-between rounded-full py-6 px-3 shadow-md backdrop-blur-xl backdrop-opacity-70 backdrop-filter hover:shadow-lg"
+    class="windowpane flex cursor-pointer justify-between rounded-full py-6 px-3"
     @click="goToCityView(city)"
   >
     <div class="ml-10 flex flex-col">
@@ -75,4 +75,18 @@ const deleteCity = (event, citySelected) => {
   cityStore.setCities(cities.value);
 };
 </script>
-<style scoped></style>
+<style scoped>
+.windowpane {
+  padding: 30px 40px;
+  margin-bottom: 8px;
+  border-radius: 50px;
+  margin-top: 10px;
+  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.5);
+  background: rgba(110, 110, 110, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.windowpane:hover {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+</style>

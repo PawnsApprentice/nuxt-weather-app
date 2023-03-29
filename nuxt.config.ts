@@ -8,15 +8,18 @@ export default defineNuxtConfig({
         autoImports: ["defineStore", "acceptHMRUpdate"],
       },
     ],
+    "@nuxtjs/google-fonts",
   ],
+  googleFonts: {
+    families: {
+      Rubik: [400, 500, 600, 700],
+    },
+  },
   //known issue on github
   build: {
     transpile: ["@fortawesome/vue-fontawesome"],
   },
-  css: [
-    "@fortawesome/fontawesome-svg-core/styles.css",
-    "@/assets/preloading.css",
-  ],
+  css: ["@fortawesome/fontawesome-svg-core/styles.css"],
 
   runtimeConfig: {
     public: {

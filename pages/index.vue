@@ -1,12 +1,12 @@
 <template>
   <main class="container text-white">
-    <div class="relative mb-8 pt-4">
+    <div class="relative mb-5 pt-4">
       <input
         v-model="searchQuery"
         @input="getSearchResults"
         type="text"
         placeholder="Search for a city or state"
-        class="focus:shadow-outline-blue w-full appearance-none rounded-lg border bg-gray-100 bg-opacity-50 px-3 py-2 placeholder-white shadow-sm transition-all duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
+        class="focus:shadow-outline-blue w-full appearance-none rounded-lg border bg-gray-100 bg-opacity-50 px-3 py-3.5 placeholder-white shadow-sm transition-all duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
       />
       <ul
         v-if="mapboxSearchResults"

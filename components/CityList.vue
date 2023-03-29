@@ -1,6 +1,6 @@
 <template>
   <button
-    class="w-3/6 rounded-full py-3 px-3 text-lg text-white shadow-md backdrop-blur-3xl backdrop-opacity-100 backdrop-filter hover:shadow-lg hover:backdrop-blur-lg"
+    class="w-3/6 rounded-full py-3 px-3 text-lg text-white hover:shadow-lg hover:backdrop-blur-lg"
     @click="findLocation()"
   >
     Find Location
@@ -54,7 +54,7 @@ const getCities = async () => {
 };
 
 //Flicker Delay
-await new Promise((res) => setTimeout(res, 1000));
+await new Promise((res) => setTimeout(res, 1500));
 
 const findLocation = () => {
   navigator.geolocation.getCurrentPosition(
@@ -70,7 +70,6 @@ const findLocation = () => {
         .then((data) => {
           const cityName = data[0].name;
           const countryName = data[0].country;
-          console.dir(data);
           router.push({
             path: `/weather/${countryName}/${cityName}`,
             query: {
@@ -93,3 +92,14 @@ const findLocation = () => {
 
 await getCities();
 </script>
+
+<style scoped>
+button {
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  background: rgba(110, 110, 110, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  z-index: 1;
+}
+</style>
