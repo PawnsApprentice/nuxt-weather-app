@@ -8,6 +8,7 @@ export const useCitiesStore = defineStore("city-store", {
       cityState: "",
       cityImage: "",
       cities: useCookie("savedCities").value || [],
+      backgroundImage: "CLOUDY_NIGHT",
     };
   },
   // could also be defined as
@@ -29,6 +30,9 @@ export const useCitiesStore = defineStore("city-store", {
     },
     setImage(url) {
       this.cityImage = url;
+    },
+    setBackgroundImage(image) {
+      this.backgroundImage = image;
     },
   },
 });

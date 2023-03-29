@@ -114,6 +114,7 @@
 import axios from "axios";
 import { fToCelcius } from "~~/utils/utils";
 import { useCitiesStore } from "~/stores/cities";
+import { backgroundChanger } from "~~/utils/utils";
 
 const cityStore = useCitiesStore();
 
@@ -149,8 +150,16 @@ const { data: weatherData, error } = await useFetch(
   {
     transform: (data) => {
       // transform the data here
+      console.log("usefected");
       const transformedData = modifyData(data);
       icon.value = transformedData.current.weather[0].icon;
+      cityStore.setBackgroundImage(
+        backgroundChanger(
+          transformedData.currentTime,
+          transformedData.current.weather[0].main
+        )
+      );
+      console.log(transformedData.current.weather[0].main);
       return transformedData;
     },
   }

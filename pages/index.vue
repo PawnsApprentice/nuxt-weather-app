@@ -41,8 +41,12 @@
 
 <script setup>
 import axios from "axios";
+import { useCitiesStore } from "~/stores/cities";
+
+const cityStore = useCitiesStore();
 
 const router = useRouter();
+cityStore.setBackgroundImage("CLOUDY_NIGHT");
 const previewCity = (searchResult) => {
   const [city, state] = searchResult.place_name.split(",");
   router.push({
