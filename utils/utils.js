@@ -17,3 +17,11 @@ export const backgroundChanger = (currentTime, weatherCondition) => {
       return hour >= 6 && hour <= 18 ? "CLEAR_DAY" : "CLEAR_NIGHT";
   }
 };
+
+export const shortenString = (str) => {
+  if (str.length <= 6) {
+    return str;
+  } else {
+    return str.substr(0, 6) + '...';
+  }
+}
