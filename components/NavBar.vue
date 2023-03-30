@@ -28,8 +28,8 @@
         <div class="text-black">
           <h1 class="mb-1 text-2xl">About:</h1>
           <p class="mb-4">
-            The Local Weather allows you to track the current and future weather
-            of cities of your choosing.
+            StormTracker allows you to track the current and future weather of
+            cities of your choosing.
           </p>
           <h2 class="text-2xl">How it works:</h2>
           <ol class="mb-4 list-inside list-decimal">
@@ -49,7 +49,7 @@
           <h2 class="text-2xl">Removing a city</h2>
           <p>
             If you no longer wish to track a city, simply select the city within
-            the home page. At the bottom of the page, there will be am option to
+            the home page. At the bottom of the page, there will be an option to
             delete the city.
           </p>
         </div></BaseModal
