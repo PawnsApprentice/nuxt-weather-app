@@ -7,7 +7,7 @@
         <div class="flex text-2xl">
           <!-- Known hydration error, need to wrap in a span else enjoy double rendering-->
           <span><font-awesome-icon :icon="['fas', 'sun']" /></span>
-          <p class="ml-4">The Local Weather</p>
+          <p class="ml-4">StormTracker</p>
         </div>
       </NuxtLink>
       <div class="flex flex-1 justify-end gap-3">
