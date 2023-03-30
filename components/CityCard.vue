@@ -12,7 +12,7 @@
       />
     </div>
     <!-- weather place -->
-    <div class="ml-2 flex w-full w-auto flex-col justify-center md:ml-10">
+    <div class="ml-2 flex w-auto flex-col justify-center md:ml-10">
       <h2 class="text-xl md:text-3xl">{{ city.city }}</h2>
       <h3 class="text-xs md:text-base">{{ city.state }}</h3>
     </div>
