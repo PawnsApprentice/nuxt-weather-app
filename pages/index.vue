@@ -89,6 +89,10 @@ const getSearchResults = () => {
     }
   }, 300);
 };
+
+onMounted(() => {
+  cityStore.setImage("");
+});
 </script>
 
 <style scoped></style>

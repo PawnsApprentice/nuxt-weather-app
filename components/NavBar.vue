@@ -20,7 +20,7 @@
           class="cursor-pointer text-xl duration-150 hover:text-weather-secondary"
           :icon="['fas', 'plus']"
           @click="addCity"
-          v-if="route.query.preview"
+          v-if="route.query.preview && cityStore.cityImage"
         />
       </div>
 
