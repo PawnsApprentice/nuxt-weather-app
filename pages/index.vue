@@ -44,7 +44,7 @@ import axios from "axios";
 import { useCitiesStore } from "~/stores/cities";
 
 const cityStore = useCitiesStore();
-cityStore.setBackgroundImage("CLOUDY_NIGHT"); //Default background
+cityStore.setBackgroundImage("CLOUDY_DAY"); //Default background
 
 const router = useRouter();
 

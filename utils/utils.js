@@ -19,9 +19,9 @@ export const backgroundChanger = (currentTime, weatherCondition) => {
 };
 
 export const shortenString = (str) => {
-  if (str.length <= 6) {
+  if (str.length <= 8) {
     return str;
   } else {
-    return str.substr(0, 6) + '...';
+    return str.substr(0, 8) + "...";
   }
-}
+};
