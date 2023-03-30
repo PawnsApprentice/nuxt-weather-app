@@ -43,14 +43,14 @@
 import { fToCelcius } from "~~/utils/utils";
 import { useCitiesStore } from "~/stores/cities";
 
-const cityStore = useCitiesStore();
-
 defineProps({
   city: {
     type: Object,
     default: () => {},
   },
 });
+
+const cityStore = useCitiesStore();
 
 const router = useRouter();
 
@@ -74,6 +74,7 @@ const deleteCity = (event, citySelected) => {
   cityStore.setCities(cities.value);
 };
 </script>
+
 <style scoped>
 .windowpane {
   padding: 30px 40px;

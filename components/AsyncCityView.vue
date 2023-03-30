@@ -111,21 +111,23 @@
 </template>
 
 <script setup>
-import axios from "axios";
 import { fToCelcius } from "~~/utils/utils";
 import { useCitiesStore } from "~/stores/cities";
 import { backgroundChanger } from "~~/utils/utils";
+
+//Flicker Delay
+await new Promise((res) => setTimeout(res, 1500));
 
 const cityStore = useCitiesStore();
 
 const route = useRoute();
 const router = useRouter();
 
-const icon = ref("");
-
 //retrieve the runtime config
 const config = useRuntimeConfig();
 const openweatherApiKey = config.OPENWEATHER_API_KEY;
+
+const icon = ref("");
 
 const modifyData = (data) => {
   // cal current date and time
@@ -142,9 +144,6 @@ const modifyData = (data) => {
   return data;
 };
 
-//Flicker Delay
-await new Promise((res) => setTimeout(res, 1500));
-
 const { data: weatherData, error } = await useFetch(
   `https://api.openweathermap.org/data/3.0/onecall?lat=${route.query.lat}&lon=${route.query.lng}&exclude={part}&appid=${openweatherApiKey}&units=imperial`,
   {
@@ -155,11 +154,9 @@ const { data: weatherData, error } = await useFetch(
       return transformedData;
     },
   }
-).catch((err) => {
-  console.error("Error fetching weather data", err);
-  return { data: null, error: err };
-});
+);
 
+//Logic used to persist wallpaper in case of refresh
 if (
   weatherData.value &&
   weatherData.value.current &&
@@ -175,10 +172,7 @@ if (
   bgImage.value = cityStore.backgroundImage;
 }
 
-onMounted(() => {
-  cityStore.setImage(`https://openweathermap.org/img/wn/${icon.value}@2x.png`);
-});
-
+//Removes the city from cookies.
 const removeCity = () => {
   const cities = useCookie("savedCities");
   const updatedCities = cities.value.filter((city) => {
@@ -190,6 +184,10 @@ const removeCity = () => {
     path: `/`,
   });
 };
+
+onMounted(() => {
+  cityStore.setImage(`https://openweathermap.org/img/wn/${icon.value}@2x.png`);
+});
 </script>
 
 <style scoped>

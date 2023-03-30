@@ -11,9 +11,4 @@
   </div>
 </template>
 
-<script setup>
-const route = useRoute();
-const { state, city } = route.params;
-</script>
-
 <style scoped></style>

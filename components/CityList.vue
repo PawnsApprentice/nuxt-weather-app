@@ -16,7 +16,6 @@
 
 <script setup>
 import axios from "axios";
-import { ref } from "vue";
 import CityCard from "./CityCard.vue";
 import { useCitiesStore } from "~/stores/cities";
 import { storeToRefs } from "pinia";
@@ -24,15 +23,17 @@ import { storeToRefs } from "pinia";
 const router = useRouter();
 
 const cityStore = useCitiesStore();
-
 const { cities } = storeToRefs(cityStore);
+
 const savedCities = reactive({
   cities: [],
 });
 
+//GET THE ENV VARIABLES
 const config = useRuntimeConfig();
 const openweatherApiKey = config.OPENWEATHER_API_KEY;
 
+//METHODS
 const getCities = async () => {
   const cities = useCookie("savedCities");
   if (cities.value) {
@@ -53,44 +54,47 @@ const getCities = async () => {
   }
 };
 
-//Flicker Delay
-await new Promise((res) => setTimeout(res, 1500));
-
 const findLocation = () => {
-  navigator.geolocation.getCurrentPosition(
-    (position) => {
-      const lat = position.coords.latitude;
-      const lng = position.coords.longitude;
+  const successCallback = (position) => {
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
 
-      // make API request to retrieve city name for coordinates
-      const apiUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${openweatherApiKey}`;
+    // make API request to retrieve city name for coordinates
+    const apiUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${openweatherApiKey}`;
 
-      fetch(apiUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          const cityName = data[0].name;
-          const countryName = data[0].country;
-          router.push({
-            path: `/weather/${countryName}/${cityName}`,
-            query: {
-              lat: lat,
-              lng: lng,
-              preview: true,
-            },
-          });
-        })
-        .catch((error) => {
-          console.log(`Error getting city name: ${error}`);
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const cityName = data[0].name;
+        const countryName = data[0].country;
+        router.push({
+          path: `/weather/${countryName}/${cityName}`,
+          query: {
+            lat: lat,
+            lng: lng,
+            preview: true,
+          },
         });
-    },
+      })
+      .catch((error) => {
+        console.log(`Error getting city name: ${error}`);
+      });
+  };
 
-    (error) => {
-      console.log("Error getting location.");
-    }
-  );
+  const errorCallback = (error) => {
+    console.error(`Error getting location. ${error} encountered`);
+    alert(
+      "Could not retrieve your location. Please enable location services and try again."
+    );
+  };
+
+  navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 };
 
 await getCities();
+
+//Flicker Delay
+await new Promise((res) => setTimeout(res, 1500));
 </script>
 
 <style scoped>

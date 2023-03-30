@@ -44,9 +44,20 @@ import axios from "axios";
 import { useCitiesStore } from "~/stores/cities";
 
 const cityStore = useCitiesStore();
+cityStore.setBackgroundImage("CLOUDY_NIGHT"); //Default background
 
 const router = useRouter();
-cityStore.setBackgroundImage("CLOUDY_NIGHT");
+
+const searchQuery = ref("");
+const queryTimeout = ref(null);
+const mapboxSearchResults = ref(null);
+const searchError = ref(null);
+
+//retrieve the runtime config
+const config = useRuntimeConfig();
+const mapboxApiKey = config.MAPBOX_API_KEY;
+
+//METHODS
 const previewCity = (searchResult) => {
   const [city, state] = searchResult.place_name.split(",");
   router.push({
@@ -58,14 +69,6 @@ const previewCity = (searchResult) => {
     },
   });
 };
-const searchQuery = ref("");
-const queryTimeout = ref(null);
-const mapboxSearchResults = ref(null);
-const searchError = ref(null);
-
-//retrieve the runtime config
-const config = useRuntimeConfig();
-const mapboxApiKey = config.MAPBOX_API_KEY;
 
 const getSearchResults = () => {
   clearTimeout(queryTimeout.value);

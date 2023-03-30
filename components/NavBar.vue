@@ -64,22 +64,24 @@ import { useCitiesStore } from "~/stores/cities";
 import { storeToRefs } from "pinia";
 
 const cityStore = useCitiesStore();
-
 const { cityImage } = storeToRefs(cityStore);
+
 const route = useRoute();
 const router = useRouter();
-const modalActive = ref(null);
 
+const modalActive = ref(null);
+const savedCities = ref([]);
+
+//METHODS
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
-const savedCities = ref([]);
+
 const addCity = () => {
   const citiesFromCookies = useCookie("savedCities");
   if (citiesFromCookies.value) {
     savedCities.value = citiesFromCookies.value;
   }
-
   const locationObj = {
     id: uid(),
     state: route.params.state,
@@ -90,7 +92,6 @@ const addCity = () => {
     },
     image: cityImage.value,
   };
-
   savedCities.value.push(locationObj);
   citiesFromCookies.value = savedCities.value;
   cityStore.setCities(savedCities.value);
