@@ -40,7 +40,12 @@ const backgroundImage = {
 };
 
 const bgImage = computed(() => {
+  console.log("triggered");
   return backgroundImage[cityStore.backgroundImage];
+});
+
+useHead({
+  title: "Local Weather App ",
 });
 </script>
 

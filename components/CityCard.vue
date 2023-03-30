@@ -55,7 +55,6 @@ defineProps({
 const router = useRouter();
 
 const goToCityView = (city) => {
-  console.log(city);
   cityStore.setCityDetails(city.id, city.state, city.city);
   router.push({
     path: `/weather/${city.state}/${city.city}`,

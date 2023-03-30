@@ -150,20 +150,31 @@ const { data: weatherData, error } = await useFetch(
   {
     transform: (data) => {
       // transform the data here
-      console.log("usefected");
       const transformedData = modifyData(data);
       icon.value = transformedData.current.weather[0].icon;
-      cityStore.setBackgroundImage(
-        backgroundChanger(
-          transformedData.currentTime,
-          transformedData.current.weather[0].main
-        )
-      );
       console.log(transformedData.current.weather[0].main);
       return transformedData;
     },
   }
-);
+).catch((err) => {
+  console.error("Error fetching weather data", err);
+  return { data: null, error: err };
+});
+
+if (
+  weatherData.value &&
+  weatherData.value.current &&
+  weatherData.value.current.weather
+) {
+  const bgImage = useCookie("bgImage");
+  cityStore.setBackgroundImage(
+    backgroundChanger(
+      weatherData.value.currentTime,
+      weatherData.value.current.weather[0].main
+    )
+  );
+  bgImage.value = cityStore.backgroundImage;
+}
 
 onMounted(() => {
   cityStore.setImage(`https://openweathermap.org/img/wn/${icon.value}@2x.png`);

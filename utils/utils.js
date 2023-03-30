@@ -4,7 +4,6 @@ export const fToCelcius = (num) => {
 
 export const backgroundChanger = (currentTime, weatherCondition) => {
   const hour = new Date(currentTime).getHours(); // Convert Unix timestamp to hours
-  console.log(hour);
   switch (weatherCondition) {
     case "Clear":
       return hour >= 6 && hour <= 18 ? "CLEAR_DAY" : "CLEAR_NIGHT";
