@@ -152,7 +152,6 @@ const { data: weatherData, error } = await useFetch(
       // transform the data here
       const transformedData = modifyData(data);
       icon.value = transformedData.current.weather[0].icon;
-      console.log(transformedData.current.weather[0].main);
       return transformedData;
     },
   }

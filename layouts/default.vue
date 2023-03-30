@@ -40,7 +40,6 @@ const backgroundImage = {
 };
 
 const bgImage = computed(() => {
-  console.log("triggered");
   return backgroundImage[cityStore.backgroundImage];
 });
 
