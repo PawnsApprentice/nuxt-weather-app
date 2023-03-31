@@ -95,18 +95,6 @@
         </div>
       </div>
     </div>
-    <div
-      v-if="cityStore.cityId"
-      class="mb-10 flex cursor-pointer items-center gap-2 text-white duration-150 hover:text-red-500"
-      @click="removeCity"
-    >
-      <font-awesome-icon
-        class="cursor-pointer text-xl duration-150 hover:text-weather-secondary"
-        :icon="['fas', 'trash']"
-        @click="toggleModal"
-      />
-      <p>Remove City</p>
-    </div>
   </div>
 </template>
 

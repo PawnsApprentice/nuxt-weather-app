@@ -48,12 +48,11 @@
 
           <h2 class="text-2xl">Removing a city</h2>
           <p>
-            If you no longer wish to track a city, simply select the city within
-            the home page. At the bottom of the page, there will be an option to
-            delete the city.
+            If you no longer wish to track a city, simply select the delete
+            trash icon within the home page on the city card.
           </p>
-        </div></BaseModal
-      >
+        </div>
+      </BaseModal>
     </nav>
   </header>
 </template>
