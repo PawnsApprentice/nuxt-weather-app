@@ -91,7 +91,8 @@ const getSearchResults = () => {
 };
 
 onMounted(() => {
-  cityStore.setImage("");
+  const bgImage = useCookie("bgImage");
+  bgImage.value = "CLOUDY_DAY";
 });
 </script>
 
